@@ -26,7 +26,7 @@ body {
 <body>
     <div class="center">
         <p class="info">
-            go away
+            <a href="https://youtu.be/njdJeu95p6s">How to center a div</a>
         </p>
     </div>
 </body>
