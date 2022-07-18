@@ -26,7 +26,7 @@ body {
 <body>
     <div class="center">
         <p class="info">
-            click <a href="https://youtu.be/xvFZjo5PgG0" class="link">this link</a> for more info
+            go away
         </p>
     </div>
 </body>
