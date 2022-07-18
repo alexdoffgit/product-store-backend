@@ -9,23 +9,26 @@ class ProductController extends Controller
 {
     public function createProduct(Request $request){
 
-        $product = Product::create($request->all());
+        $product = new Product();
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
     
         return response()->json($product);
-    
     }
     
     public function updateProduct(Request $request, $id){
     
-        $product  = DB::table('products')->where('pid',$request->input('pid'))->get();
-           $product->name = $request->input('name');
-           $product->price = $request->input('price');
-           $product->description = $request->input('description');
-           $product->save();
+        $product = Product::where("pid", $id)->first();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
     
-           $response["products"] = $product;
-    
-           $response["success"] = 1;
+        $response["products"] = $product;
+        $response["success"] = 1;
     
         return response()->json($response);
     
@@ -35,9 +38,7 @@ class ProductController extends Controller
     
     public function deleteProduct(Request $request, $id){
     
-        $product  = DB::table('products')->where('pid',$request->input('pid'))->get();
-    
-        $product->delete();
+        Product::where('pid', $id)->delete();
     
         return response()->json('Removed successfully.');
     
@@ -48,10 +49,8 @@ class ProductController extends Controller
     public function index(){
     
         $products  = Product::all();
-    
-           $response["products"] = $products;
-    
-           $response["success"] = 1;
+        $response["products"] = $products;
+        $response["success"] = 1;
     
         return response()->json($response);
     
