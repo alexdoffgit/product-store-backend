@@ -21,17 +21,18 @@ class ProductController extends Controller
     
     public function updateProduct(Request $request, $id){
     
-        $product = Product::where("pid", $id)->first();
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->description = $request->description;
-        $product->save();
+        Product::where("pid", $id)->update([
+            'name' => $request->name, 
+            'price' => $request->price, 
+            'description' => $request->description
+        ]);
     
+        $product = Product::where("pid", $id)->get();
+
         $response["products"] = $product;
         $response["success"] = 1;
-    
+
         return response()->json($response);
-    
     }  
     
     
